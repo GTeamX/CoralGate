@@ -35,7 +35,7 @@ If you wish to get support, test or have any questions about CoralGate, make sur
 
 CoralGate supports a wide range of Minecraft server implementations.
 
-| Platform       | 1.8.x | 1.9.x – 1.15.x | 1.16.x – 1.20.x | 1.21.x | 26.x | &gt; 26.2 |
+| Platform       | 1.8.x | 1.9.x – 1.15.x | 1.16.x – 1.20.x | 1.21.x | 26.x | &gt; 26.3 |
 |----------------|:-----:|:--------------:|:---------------:|:------:|:----:|:---------:|
 | **Spigot**     |  ⚠️   |       ✅        |        ✅        |   ✅    |  ✅   |     ❓     |
 | **Paper**      |   ✅   |       ✅        |       ⚠️        |   ✅    |  ✅   |     ❓     |
@@ -59,22 +59,6 @@ CoralGate supports a wide range of Minecraft server implementations.
 - **1.19.4 - 1.20.x:** not supported (broken modern 'paper-plugin.yml').
 
 *Sponge, Fabric, Forge, NeoForge and any hybrid server platform is not officially supported.*
-</details>
-
-<details>
-<summary><i>View fully detailed platform and version support list.</i></summary>
-
-| Platform       | <1.8 | 1.8 | 1.8.3 | 1.8.8 | 1.9 | 1.9.1 | 1.9.2 | 1.9.3/4 | 1.10.x | 1.11 | 1.11.x | 1.12 | 1.12.1 | 1.12.2 | 1.13 | 1.13.1 | 1.13.2 | 1.14 | 1.14.1 | 1.14.2 | 1.14.3 | 1.14.4 | 1.15 | 1.15.1 | 1.15.2 | 1.16 | 1.16.1 | 1.16.2 | 1.16.3 | 1.16.4/5 | 1.17 | 1.17.1 | 1.18 | 1.18.1 | 1.18.2 | 1.19 | 1.19.1/2 | 1.19.3 | 1.19.4 | 1.20/.1 | 1.20.2 | 1.20.3/4 | 1.20.5/6 | 1.21/.1 | 1.21.2/3 | 1.21.4 | 1.21.5 | 1.21.6 | 1.21.7/8 | 1.21.9/10 | 1.21.11 | 26.1.x | 26.2 | &gt;26.2 |
-|:---------------|:----:|:---:|:-----:|:-----:|:---:|:-----:|:-----:|:-------:|:------:|:----:|:------:|:----:|:------:|:------:|:----:|:------:|:------:|:----:|:------:|:------:|:------:|:------:|:----:|:------:|:------:|:----:|:------:|:------:|:------:|:--------:|:----:|:------:|:----:|:------:|:------:|:----:|:--------:|:------:|:------:|:-------:|:------:|:--------:|:--------:|:-------:|:--------:|:------:|:------:|:------:|:--------:|:---------:|:-------:|:------:|:----:|:--------:|
-| **Spigot**     |  ❌   |  ❌  |  ⚠️   |   ✅   |  ✅  |   ❌   |   ✅   |    ✅    |   ✅    |  ✅   |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |  ❌   |   ✅    |   ✅    |   ✅    |    ✅     |  ✅   |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |    ✅     |   ❌    |   ✅    |    ✅    |   ✅    |    ✅     |    ✅     |    ✅    |    ✅     |   ✅    |   ✅    |   ✅    |    ✅     |     ✅     |    ✅    |   ✅    |  ✅   |    ❓     |
-| **Paper**      |  ❌   |  ❌  |   ❌   |   ✅   |  ❌  |   ❌   |   ❌   |    ✅    |   ✅    |  ❌   |   ✅    |  ❌   |   ❌    |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |  ❌   |   ✅    |   ✅    |   ✅    |    ✅     |  ✅   |   ✅    |  ❌   |   ✅    |   ✅    |  ✅   |    ✅     |   ❌    |   ❌    |    ❌    |   ❌    |    ❌     |    ❌     |    ✅    |    ✅     |   ✅    |   ✅    |   ✅    |    ✅     |     ✅     |    ✅    |   ✅    |  ✅   |    ❓     |
-| **BungeeCord** |  ❌   |  ✅  |   ✅   |   ✅   |  ✅  |   ❌   |   ✅   |    ✅    |   ✅    |  ✅   |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |   ✅    |   ✅    |  ✅   |   ✅    |   ✅    |  ❌   |   ✅    |   ✅    |   ✅    |    ✅     |  ✅   |   ✅    |  ✅   |   ✅    |   ✅    |  ✅   |    ✅     |   ✅    |   ✅    |    ✅    |   ❌    |    ✅     |    ✅     |    ✅    |    ✅     |   ✅    |   ✅    |   ✅    |    ✅     |     ✅     |    ✅    |   ✅    |  ✅   |    ❓     |
-| **Velocity**   |  ❌   |  ❓  |   ❓   |   ❓   |  ❓  |   ❓   |   ❓   |    ❓    |   ❓    |  ❓   |   ❓    |  ❓   |   ❓    |   ❓    |  ❓   |   ❓    |   ❓    |  ❓   |   ❓    |   ❓    |   ❓    |   ❓    |  ❓   |   ❓    |   ❓    |  ❓   |   ❓    |   ❓    |   ❓    |    ❓     |  ❓   |   ❓    |  ❓   |   ❓    |   ❓    |  ❓   |    ❓     |   ❓    |   ❓    |    ❓    |   ❓    |    ❓     |    ❓     |    ❓    |    ❓     |   ❓    |   ❓    |   ❓    |    ❓     |     ❓     |    ❓    |   ❓    |  ❓   |    ❓     |
-| **Sponge**     |  ❌   |  ❌  |   ❌   |   ❌   |  ❌  |   ❌   |   ❌   |    ❌    |   ❌    |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |    ❌     |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |    ❌     |   ❌    |   ❌    |    ❌    |   ❌    |    ❌     |    ❌     |    ❌    |    ❌     |   ❌    |   ❌    |   ❌    |    ❌     |     ❌     |    ❌    |   ❌    |  ❌   |    ❌     |
-| **Fabric**     |  ❌   |  ❌  |   ❌   |   ❌   |  ❌  |   ❌   |   ❌   |    ❌    |   ❌    |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |    ❌     |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |    ❌     |   ❌    |   ❌    |    ❌    |   ❌    |    ❌     |    ❌     |    ❌    |    ❌     |   ❌    |   ❌    |   ❌    |    ❌     |     ❌     |    ❌    |   ❌    |  ❌   |    ❌     |
-| **Forge**      |  ❌   |  ❌  |   ❌   |   ❌   |  ❌  |   ❌   |   ❌   |    ❌    |   ❌    |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |    ❌     |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |    ❌     |   ❌    |   ❌    |    ❌    |   ❌    |    ❌     |    ❌     |    ❌    |    ❌     |   ❌    |   ❌    |   ❌    |    ❌     |     ❌     |    ❌    |   ❌    |  ❌   |    ❌     |
-| **NeoForge**   |  ❌   |  ❌  |   ❌   |   ❌   |  ❌  |   ❌   |   ❌   |    ❌    |   ❌    |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |   ❌    |   ❌    |   ❌    |    ❌     |  ❌   |   ❌    |  ❌   |   ❌    |   ❌    |  ❌   |    ❌     |   ❌    |   ❌    |    ❌    |   ❌    |    ❌     |    ❌     |    ❌    |    ❌     |   ❌    |   ❌    |   ❌    |    ❌     |     ❌     |    ❌    |   ❌    |  ❌   |    ❌     |
-
 </details>
 
 ## Installation
@@ -103,31 +87,7 @@ If you ever mess up your configuration file, delete it and restart your server. 
 
 CoralGate utilizes a proprietary, custom-built API hosted in Germany (fully GDPR-compliant) to determine IP reputation. The API is free, requires no authentication keys, and supports both IPv4 and IPv6.
 
-You can manually query the API using the following structure:
-`https://api.gteam.cloud/coralgate/v2/<ip_address>`
-
-**Examples:**
-- `https://api.gteam.cloud/coralgate/v2/185.65.134.164` *(Returns malicious)*
-- `https://api.gteam.cloud/coralgate/v2/9.9.9.9` *(Returns safe)*
-
-### False Positives
-
-If your ISP, domain name, or personal IP is falsely flagged and blocked from CoralGate-protected servers, please open a ticket on our [Discord](https://discord.gteam.cloud). Provide the affected IP addresses and their primary use case, and our support team will assist with whitelisting.
-
-**Traffic routinely blocked by the API:**
-Port/IP scanners, crawlers, MOTD/player-count fetchers, VPNs, proxies, TOR exit nodes, and automated hosting services (e.g., Shodan, OpenHeimer).
-
-**Traffic exempt from blocking:**
-Known voting sites and verified server lists.
-
-### Privacy & Disclosure
-
-By default, CoralGate automatically verifies the reputation of connecting players to block malicious traffic.
-
-* **Data Transmitted:** When a player attempts to join, their IP address is sent via a secure GET request to our proprietary API.
-* **Endpoint:** `https://api.gteam.cloud/coralgate/v2/<ip_address>`
-* **Privacy:** The API is hosted in Germany (fully GDPR-compliant). No personally identifiable information (PII) beyond the IP is processed, and data is used strictly for real-time risk assessment.
-* **Opt-Out:** You can entirely disable this external API lookup or route requests through your own custom endpoint by modifying the `config.yml` file.
+Learn more about it [here](https://gteam.cloud/api/#about).
 
 ## Contributing & Support
 
