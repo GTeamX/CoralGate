@@ -332,60 +332,51 @@ public class NetworkProcessor implements PacketListener {
             // If something is wrong, log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
             verifyAndTransitionState(packetReceiveEvent, inetSocketAddress, ipAddress, packetTypeCommon, PacketType.Handshaking.Client.HANDSHAKE, packetTypeCommon, "Missing proper handshake.");
 
-            // This only works on Spigot/Paper due to a bug on BungeeCord/Velocity with packetevents.
-            // Proxies pass the API check when reaching "LOGIN_SUCCESS (S->C). It's the only place where it will work like LOGIN_START.
-            // Note: this does cause information about ENCRYPTION_REQUEST and SET_COMPRESSION to leak towards the player...
-            // See issues: https://github.com/GTeamX/CoralGate/issues/34 and https://github.com/retrooper/packetevents/issues/1465
-            // TODO: find better solution/fix PE issue
-            if (!PacketEvents.getAPI().getInjector().isProxy()) {
+            // The state validation failed, no need to run a check against the API.
+            if (packetReceiveEvent.isCancelled()) {
+                return; // Block further logic.
+            }
 
-                // The state validation failed, no need to run a check against the API.
-                if (packetReceiveEvent.isCancelled()) {
-                    return; // Block further logic.
+            // Either if health checking is disabled or if the API is truly healthy.
+            if (!this.corePlugin.getConfigManager().getConfig().isApiHealthCheck() || this.corePlugin.getApiManager().isHealthy()) {
+
+                // Cancel the packet to send it later.
+                packetReceiveEvent.setCancelled(true);
+
+                // Cache wrapper and data to reconstruct and send it back later.
+                final WrapperLoginClientLoginStart wrapperLoginClientLoginStart = new WrapperLoginClientLoginStart(packetReceiveEvent);
+
+                // Cache username, it's being used twice. Save some CPU for the rest of us!!!1111!!1!1!
+                final String username = wrapperLoginClientLoginStart.getUsername();
+
+                // Filter debug usernames.
+                if (username.startsWith("Player")) {
+
+                    // Log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
+                    log(packetReceiveEvent, inetSocketAddress, ipAddress, packetTypeCommon, "Bot-like username pattern detected.", true);
+
+                    // The connection is closed and the packet dropped, no need to run a check against the API.
+                    // Block further logic.
+                    return;
+
                 }
 
-                // Either if health checking is disabled or if the API is truly healthy.
-                if (!this.corePlugin.getConfigManager().getConfig().isApiHealthCheck() || this.corePlugin.getApiManager().isHealthy()) {
+                // Fetch API async.
+                this.corePlugin.getApiManager().isIpBlocked(ipAddress).thenAccept(blocked -> {
 
-                    // Cancel the packet to send it later.
-                    packetReceiveEvent.setCancelled(true);
-
-                    // Cache wrapper and data to reconstruct and send it back later.
-                    final WrapperLoginClientLoginStart wrapperLoginClientLoginStart = new WrapperLoginClientLoginStart(packetReceiveEvent);
-
-                    // Cache username, it's being used twice. Save some CPU for the rest of us!!!1111!!1!1!
-                    final String username = wrapperLoginClientLoginStart.getUsername();
-
-                    // Filter debug usernames.
-                    if (username.startsWith("Player")) {
+                    if (blocked) {
 
                         // Log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
-                        log(packetReceiveEvent, inetSocketAddress, ipAddress, packetTypeCommon, "Bot-like username pattern detected.", true);
+                        log(packetReceiveEvent, inetSocketAddress, ipAddress, packetTypeCommon, "IP is blocked by the API.", true);
 
-                        // The connection is closed and the packet dropped, no need to run a check against the API.
-                        // Block further logic.
-                        return;
+                    } else {
+
+                        // Process the packet again, the player is verified by the API.
+                        packetUser.receivePacketSilently(new WrapperLoginClientLoginStart(wrapperLoginClientLoginStart.getClientVersion(), username, wrapperLoginClientLoginStart.getSignatureData().orElse(null), wrapperLoginClientLoginStart.getPlayerUUID().orElse(null)));
 
                     }
 
-                    // Fetch API async.
-                    this.corePlugin.getApiManager().isIpBlocked(ipAddress).thenAccept(blocked -> {
-
-                        if (blocked) {
-
-                            // Log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
-                            log(packetReceiveEvent, inetSocketAddress, ipAddress, packetTypeCommon, "IP is blocked by the API.", true);
-
-                        } else {
-
-                            // Process the packet again, the player is verified by the API.
-                            packetUser.receivePacketSilently(new WrapperLoginClientLoginStart(wrapperLoginClientLoginStart.getClientVersion(), username, wrapperLoginClientLoginStart.getSignatureData().orElse(null), wrapperLoginClientLoginStart.getPlayerUUID().orElse(null)));
-
-                        }
-
-                    });
-
-                }
+                });
 
             }
 
@@ -515,44 +506,6 @@ public class NetworkProcessor implements PacketListener {
             // Validate state against certain conditions: previous SET_COMPRESSION (if above 0) else ENCRYPTION_RESPONSE (if online mode) else LOGIN_START.
             // If something is wrong, log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
             verifyAndTransitionState(packetSendEvent, inetSocketAddress, ipAddress, packetTypeCommon, requiredPacketTypeCommon, packetTypeCommon, "Missing set compression procedure.");
-
-            // This fix is really only for proxies. The API check run way earlier for the Spigot/Paper versions.
-            if (PacketEvents.getAPI().getInjector().isProxy()) {
-
-                // The state validation failed, no need to run a check against the API.
-                if (packetSendEvent.isCancelled()) {
-                    return; // Block further logic.
-                }
-
-                // Either if health checking is disabled or if the API is truly healthy.
-                if (!this.corePlugin.getConfigManager().getConfig().isApiHealthCheck() || this.corePlugin.getApiManager().isHealthy()) {
-
-                    // Cancel the packet to send it later.
-                    packetSendEvent.setCancelled(true);
-
-                    // Cache wrapper and data to reconstruct and send it back later.
-                    final WrapperLoginServerLoginSuccess wrapperLoginServerLoginSuccess = new WrapperLoginServerLoginSuccess(packetSendEvent);
-
-                    // Fetch API async.
-                    this.corePlugin.getApiManager().isIpBlocked(ipAddress).thenAccept(blocked -> {
-
-                        if (blocked) {
-
-                            // Log the violation, report the IP to CoralGate API, cancel the packet and close the connection.
-                            log(packetSendEvent, inetSocketAddress, ipAddress, packetTypeCommon, "IP is blocked by the API.");
-
-                        } else {
-
-                            // Process the packet again, the player is verified by the API.
-                            packetSendEvent.getUser().sendPacketSilently(new WrapperLoginServerLoginSuccess(wrapperLoginServerLoginSuccess.getUserProfile(), wrapperLoginServerLoginSuccess.getSessionId(), wrapperLoginServerLoginSuccess.isStrictErrorHandling()));
-
-                        }
-
-                    });
-
-                }
-
-            }
 
             // Block further logic.
             return;
